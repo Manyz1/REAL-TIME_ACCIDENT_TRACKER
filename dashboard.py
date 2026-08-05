@@ -11,7 +11,14 @@ def _danger_color(level):
 def draw_dashboard(annotated, pixel_speed, danger_lvl, last_accident_ts):
     h, w = annotated.shape[:2]
 
-    y = 20
+    if last_accident_ts:
+        cv2.putText(annotated, "STATUS: ACCIDENT DETECTED!", (10, 25),
+                    cv2.FONT_HERSHEY_DUPLEX, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
+    else:
+        cv2.putText(annotated, "STATUS: NORMAL TRAFFIC", (10, 25),
+                    cv2.FONT_HERSHEY_DUPLEX, 0.7, (0, 200, 0), 2, cv2.LINE_AA)
+
+    y = 55
     for tid, speeds in list(pixel_speed.items())[:6]:
         if not speeds:
             continue
