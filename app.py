@@ -348,8 +348,12 @@ def status_panel():
     progress   = snap["progress"]
     video_done = snap["video_done"]
     out_path   = snap.get("output_path")
+    err_msg    = snap.get("error_msg")
 
     left, right = st.columns([1, 1], gap="large")
+
+    if err_msg:
+        st.error(f"Pipeline crashed: {err_msg}")
 
     with left:
         st.markdown('<p class="section-label">Detection Status</p>', unsafe_allow_html=True)
