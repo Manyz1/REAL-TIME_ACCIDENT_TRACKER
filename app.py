@@ -140,16 +140,25 @@ with st.sidebar:
     clip_threshold = st.slider("Confirmation threshold", 0.50, 1.00, CLIP_THRESHOLD, 0.05)
     st.caption("Minimum CLIP score to confirm an accident. Higher values mean stricter verification — fewer false positives but may miss some events.")
 
-    if not _IS_LOCAL:
-        st.divider()
-        with st.expander("Need Live Capture? — Run Locally"):
-            st.markdown("""
+
+
+
+# ── MAIN ─────────────────────────────────────────────────────────────────────
+
+st.markdown("## Accident Tracker")
+if _IS_LOCAL:
+    st.caption("Local mode — window capture, live display, and full model quality available.")
+else:
+    st.caption("Cloud mode — upload a video file and download the annotated result.")
+    
+    with st.expander("Need Live Capture? — Run Locally"):
+        st.markdown("""
 **To use window capture and live display, run the app on your own Windows machine:**
 
 **1. Clone the repository**
 ```
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/Manyz1/REAL-TIME_ACCIDENT_TRACKER.git
+cd REAL-TIME_ACCIDENT_TRACKER
 ```
 
 **2. Install dependencies**
@@ -167,14 +176,6 @@ Then open **http://localhost:8501** in your browser.
 > Windows 10/11 required. A GPU is recommended for real-time performance.
 """)
 
-
-# ── MAIN ─────────────────────────────────────────────────────────────────────
-
-st.markdown("## Accident Tracker")
-if _IS_LOCAL:
-    st.caption("Local mode — window capture, live display, and full model quality available.")
-else:
-    st.caption("Cloud mode — upload a video file and download the annotated result.")
 st.markdown("<hr>", unsafe_allow_html=True)
 
 
