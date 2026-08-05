@@ -359,11 +359,14 @@ def status_panel():
         st.markdown('<p class="section-label">Detection Status</p>', unsafe_allow_html=True)
 
         if video_done and not running:
-            css, icon_n, title, sub = "s-done",      "done",      "Video Processed",    "The file has been fully analysed."
+            if ts:
+                css, icon_n, title, sub = "s-confirmed", "confirmed", "Accident Found!", f"Crash detected at {ts}. Output video is ready below."
+            else:
+                css, icon_n, title, sub = "s-done",      "done",      "Video Processed",    "Analysis complete. No accidents detected."
         elif not running and not ts:
             css, icon_n, title, sub = "s-idle",      "idle",      "Idle",               "Press Start to begin."
         elif ts:
-            css, icon_n, title, sub = "s-confirmed", "confirmed", "Accident Confirmed", f"Detected at {ts}"
+            css, icon_n, title, sub = "s-confirmed", "confirmed", "Accident Confirmed", f"Detected at {ts}. Continuing analysis..."
         elif danger >= 0.7:
             css, icon_n, title, sub = "s-suspected", "suspected", "Suspected Crash",    "Sending frames to CLIP for verification…"
         else:
@@ -395,8 +398,9 @@ def status_panel():
         if not _IS_LOCAL and video_done and out_path and os.path.isfile(out_path):
             st.write("")
             with open(out_path, "rb") as f:
+                btn_label = "🚨 Download Video (Accident Found)" if ts else "✅ Download Video (Clear)"
                 st.download_button(
-                    label="Download Annotated Video",
+                    label=btn_label,
                     data=f,
                     file_name="accident_tracker_output.mp4",
                     mime="video/mp4",
