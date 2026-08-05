@@ -5,3 +5,4 @@ torch
 transformers
 Pillow
 streamlit>=1.33.0
+lapx
