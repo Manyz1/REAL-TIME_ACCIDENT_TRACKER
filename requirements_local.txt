@@ -1,0 +1,8 @@
+ultralytics
+scipy
+opencv-python
+torch
+transformers
+pywin32
+Pillow
+streamlit>=1.33.0

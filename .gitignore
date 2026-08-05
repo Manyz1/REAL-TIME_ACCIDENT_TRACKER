@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+
+# Model weights (downloaded automatically by ultralytics/HuggingFace)
+*.pt
+*.pth
+
+# Saved accident frames
+crashes/*.png
+crashes/*.jpg
+
+# Temp output videos
+output_*.mp4
+
+# Streamlit cache
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
